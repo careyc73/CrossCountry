@@ -24,10 +24,20 @@ Runner::Runner(char * firstName, char * lastName, school_year year, int baseTale
 	sprintf(presentation, presentationString, lastName, firstName, year);
 }
 
-int Runner::run() {
-	return baseFinishTime - baseTalent + ((rand() % 60) - 30);
+Runner::~Runner() {
+	for (int i = 0 ; i < performances.size() ; i++) {
+		delete performances[i];
+	}
+}
+
+int Runner::getBaseTalent() {
+	return baseTalent;
 }
 
 char * Runner::toString() {
 	return presentation;
+}
+
+void Runner::appendPerformance(Performance * performance) {
+	performances.push_back(performance);
 }
