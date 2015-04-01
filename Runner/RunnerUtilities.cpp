@@ -11,18 +11,22 @@
 
 using namespace std;
 
-static char *allFirstNames[9] = {"Chris", "Gabe", "Travis",
-"Matt", "Mike", "Tom", "Joe", "Bob", "Myles"};
+static const int numNames = 14;
 
-static char *allLastNames[9] = {"Carey", "Jones", "Jennings",
-"Smith", "Kramer", "Schroeder", "Erickson", "Miller", "Downs"};
+static char *allFirstNames[numNames] = {"Chris", "Gabe", "Travis",
+"Matt", "Mike", "Tom", "Joe", "Bob", "Myles", "Bryon", "Todd", "Lee",
+"Kurt", "Cooper"};
+
+static char *allLastNames[numNames] = {"Carey", "Jones", "Jennings",
+"Smith", "Kramer", "Schroeder", "Erickson", "Miller", "Downs", "Kluever",
+"Kenas", "Solinsky", "Bechtel", "Hecht"};
 
 class RunnerUtilities {
 
 public:
 	static Runner * newRunner() {
-		char * firstName = allFirstNames[rand() %9];
-		char * lastName = allLastNames[rand() %9];
+		char * firstName = allFirstNames[rand() % numNames];
+		char * lastName = allLastNames[rand() % numNames];
 		int yearRand = rand() % 100;
 		school_year year;
 

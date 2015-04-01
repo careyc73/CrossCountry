@@ -8,6 +8,7 @@ RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
+-include Team/subdir.mk
 -include Runner/subdir.mk
 -include Competition/subdir.mk
 -include subdir.mk

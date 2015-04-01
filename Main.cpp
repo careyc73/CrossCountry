@@ -5,22 +5,26 @@
  *      Author: careyc
  */
 
-#include "Runner/Runner.h"
+#include "Team/Team.h"
 #include "Runner/RunnerUtilities.cpp"
+#include <stdlib.h>
 #include "Competition/Performance.h"
 
 using namespace std;
 
 int main() {
 	srand(time(NULL));
-	Runner * runnerOne = RunnerUtilities::newRunner();
 
-	cout << runnerOne->toString();
+	Team * team = new Team();
+	Performance *performance[teamSize];
 
-	Performance * performance = new Performance(runnerOne);
+	for (int i = 0 ; i < teamSize ; i++) {
+		srand(time(NULL));
+		cout << team->getRunner(i)->toString();
+		performance[i] = new Performance(team->getRunner(i));
+		cout << RunnerUtilities::translateTime(performance[i]->getTime()) << "\n";
+	}
 
-	cout << RunnerUtilities::translateTime(performance->getTime());
-
-	delete runnerOne;
+	delete team;
 }
 

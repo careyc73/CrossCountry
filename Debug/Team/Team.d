@@ -1,8 +1,7 @@
-Main.d: ../Main.cpp ../Team/Team.h ../Team/../Runner/Runner.h \
+Team/Team.d: ../Team/Team.cpp ../Team/Team.h ../Team/../Runner/Runner.h \
  ../Team/../Runner/../Competition/Performance.h \
  ../Team/../Runner/../Competition/../Runner/Runner.h \
- ../Runner/RunnerUtilities.cpp ../Runner/Runner.h \
- ../Competition/Performance.h
+ ../Team/../Runner/RunnerUtilities.cpp ../Team/../Runner/Runner.h
 
 ../Team/Team.h:
 
@@ -12,8 +11,6 @@ Main.d: ../Main.cpp ../Team/Team.h ../Team/../Runner/Runner.h \
 
 ../Team/../Runner/../Competition/../Runner/Runner.h:
 
-../Runner/RunnerUtilities.cpp:
+../Team/../Runner/RunnerUtilities.cpp:
 
-../Runner/Runner.h:
-
-../Competition/Performance.h:
+../Team/../Runner/Runner.h:

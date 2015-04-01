@@ -18,10 +18,10 @@ Runner::Runner(char * firstName, char * lastName, school_year year, int baseTale
 
 	int padding = 55 - (strlen(firstName) + strlen(lastName));
 	char * presentationString = new char[15];
-	sprintf(presentationString, "%%s, %%-%ds %%2d\n", padding);
+	sprintf(presentationString, "%%s %%-%ds %%2d\n", padding);
 	presentation = new char [60];
 
-	sprintf(presentation, presentationString, lastName, firstName, year);
+	sprintf(presentation, presentationString, firstName, lastName, year);
 }
 
 Runner::~Runner() {

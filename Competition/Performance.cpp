@@ -9,7 +9,8 @@
 
 Performance::Performance(Runner * runner) {
 	this -> runner = runner;
-	this -> time = baseFinishTime - runner -> getBaseTalent() + ((rand() % 60) - 30);
+	double adjust = 1 + (((double) (rand() % 2000)) - 1000.0) / 10000.0;
+	this -> time = baseFinishTime - (((double) runner -> getBaseTalent()) * adjust);
 
 	runner->appendPerformance(this);
 }
