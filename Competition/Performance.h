@@ -9,21 +9,28 @@
 #define RUNNERPERFORMANCE_H_
 
 #include "../Runner/Runner.h"
+#include <algorithm>
+#include <vector>
 
 class Runner;
 
 class Performance {
 private:
-	static const int baseFinishTime = 1260;
+	static const int baseFinishTime = 990;
 
 	const Runner * runner;
 	int time;
 //	const Meet * meet;
 
 public:
-	Performance(Runner * runner);;
+	Performance(Runner * runner);
 
 	int getTime();
+	const Runner * getRunner();
+
+	static bool comparePerformances(Performance * runnerOne, Performance * runnerTwo) {
+		return runnerOne->time < runnerTwo->time;
+	}
 };
 
 

@@ -13,12 +13,14 @@
 #include <vector>
 
 #include "../Competition/Performance.h"
+#include "../Team/Team.h"
 
 using namespace std;
 
 enum school_year {Freshman = 9, Sophmore = 10, Junior = 11, Senior = 12};
 
 class Performance;
+class Team;
 
 class Runner
 {
@@ -28,15 +30,16 @@ private:
 	school_year year;
 	char * presentation;
 	int baseTalent;
+	const Team * team;
 
 	std::vector<Performance *> performances;
 
 public:
-	Runner(char * firstName, char * lastName, school_year year, int baseTalent);
+	Runner(char * firstName, char * lastName, school_year year, int baseTalent, const Team * team);
 	~Runner();
 
 	int getBaseTalent();
-	char * toString();
+	char * toString() const;
 	void appendPerformance(Performance * performance);
 };
 

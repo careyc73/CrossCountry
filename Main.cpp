@@ -9,22 +9,35 @@
 #include "Runner/RunnerUtilities.cpp"
 #include <stdlib.h>
 #include "Competition/Performance.h"
+#include <vector>
 
 using namespace std;
 
 int main() {
 	srand(time(NULL));
 
-	Team * team = new Team();
-	Performance *performance[teamSize];
+	Team * waunakee = new Team("Waunakee");
+	Team * deForest = new Team("DeForest");
+	Team * mcFarland = new Team("McFarland");
+	Team * verona = new Team("Verona");
+	std::vector<Performance*> performance;
 
 	for (int i = 0 ; i < teamSize ; i++) {
 		srand(time(NULL));
-		cout << team->getRunner(i)->toString();
-		performance[i] = new Performance(team->getRunner(i));
-		cout << RunnerUtilities::translateTime(performance[i]->getTime()) << "\n";
+		performance.push_back(new Performance(waunakee->getRunner(i)));
+		performance.push_back(new Performance(deForest->getRunner(i)));
+		performance.push_back(new Performance(mcFarland->getRunner(i)));
+		performance.push_back(new Performance(verona->getRunner(i)));
 	}
 
-	delete team;
+	std::sort(performance.begin(), performance.end(), Performance::comparePerformances);
+
+	for (int i = 0 ; i < teamSize * 4 ; i++) {
+		cout << i + 1 << "\t" << RunnerUtilities::translateTime(performance[i]->getTime()) << "\t"
+			<< performance[i]->getRunner()->toString();
+	}
+
+	delete waunakee;
+	delete deForest;
 }
 

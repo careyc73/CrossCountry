@@ -10,18 +10,21 @@
 #include <string.h>
 #include <stdlib.h>
 
-Runner::Runner(char * firstName, char * lastName, school_year year, int baseTalent){
+Runner::Runner(char * firstName, char * lastName, school_year year, int baseTalent, const Team * team){
 	this->firstName = firstName;
 	this->lastName = lastName;
 	this->year = year;
 	this->baseTalent = baseTalent;
+	this->team = team;
 
 	int padding = 55 - (strlen(firstName) + strlen(lastName));
-	char * presentationString = new char[15];
-	sprintf(presentationString, "%%s %%-%ds %%2d\n", padding);
-	presentation = new char [60];
+	char * presentationString = new char[22];
+	sprintf(presentationString, "%%s %%-%ds %%2d\t%%s\n", padding);
+	presentation = new char [80];
 
-	sprintf(presentation, presentationString, firstName, lastName, year);
+	const char * teamName = team->getName();
+
+	sprintf(presentation, presentationString, firstName, lastName, year, teamName);
 }
 
 Runner::~Runner() {
@@ -34,7 +37,7 @@ int Runner::getBaseTalent() {
 	return baseTalent;
 }
 
-char * Runner::toString() {
+char * Runner::toString() const {
 	return presentation;
 }
 

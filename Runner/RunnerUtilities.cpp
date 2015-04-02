@@ -11,20 +11,22 @@
 
 using namespace std;
 
-static const int numNames = 14;
+static const int numNames = 22;
 
 static char *allFirstNames[numNames] = {"Chris", "Gabe", "Travis",
 "Matt", "Mike", "Tom", "Joe", "Bob", "Myles", "Bryon", "Todd", "Lee",
-"Kurt", "Cooper"};
+"Kurt", "Cooper", "Dillon", "Jeff", "Saul", "Noah", "John", "Jon",
+"Ryan", "Phil"};
 
 static char *allLastNames[numNames] = {"Carey", "Jones", "Jennings",
 "Smith", "Kramer", "Schroeder", "Erickson", "Miller", "Downs", "Kluever",
-"Kenas", "Solinsky", "Bechtel", "Hecht"};
+"Kenas", "Solinsky", "Bechtel", "Hecht", "Klubertanz", "Spellman", "Russo",
+"Maddox", "Slater", "Lee", "Braun", "Dorf"};
 
 class RunnerUtilities {
 
 public:
-	static Runner * newRunner() {
+	static Runner * newRunner(const Team * team) {
 		char * firstName = allFirstNames[rand() % numNames];
 		char * lastName = allLastNames[rand() % numNames];
 		int yearRand = rand() % 100;
@@ -43,7 +45,7 @@ public:
 			year = Senior;
 		}
 
-		return new Runner(firstName, lastName, year, rand() % 270);
+		return new Runner(firstName, lastName, year, rand() % 270, team);
 	}
 
 	static char * translateTime(int time) {
