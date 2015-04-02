@@ -18,7 +18,7 @@ class Performance {
 private:
 	static const int baseFinishTime = 990;
 
-	const Runner * runner;
+	Runner * runner;
 	int time;
 //	const Meet * meet;
 
@@ -26,7 +26,7 @@ public:
 	Performance(Runner * runner);
 
 	int getTime();
-	const Runner * getRunner();
+	Runner * getRunner();
 
 	static bool comparePerformances(Performance * runnerOne, Performance * runnerTwo) {
 		return runnerOne->time < runnerTwo->time;

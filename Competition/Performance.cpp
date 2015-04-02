@@ -19,7 +19,7 @@ int Performance::getTime() {
 	return time;
 }
 
-const Runner * Performance::getRunner() {
+Runner * Performance::getRunner() {
 	return runner;
 }
 

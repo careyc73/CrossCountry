@@ -6,13 +6,13 @@
  */
 
 #include "Team.h"
-#include "../Runner/RunnerUtilities.cpp"
+#include "../UtilityFunctions.h"
 
 Team::Team(char * teamName) {
 	this->teamName = teamName;
 
 	for (int i = 0 ; i < teamSize ; i++) {
-		runners[i] = RunnerUtilities::newRunner(this);
+		runners[i] = UtilityFunctions::newRunner(this);
 	}
 }
 

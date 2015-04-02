@@ -4,16 +4,13 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
-../Runner/Runner.cpp \
-../Runner/RunnerUtilities.cpp 
+../Runner/Runner.cpp 
 
 OBJS += \
-./Runner/Runner.o \
-./Runner/RunnerUtilities.o 
+./Runner/Runner.o 
 
 CPP_DEPS += \
-./Runner/Runner.d \
-./Runner/RunnerUtilities.d 
+./Runner/Runner.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

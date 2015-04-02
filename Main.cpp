@@ -6,7 +6,7 @@
  */
 
 #include "Team/Team.h"
-#include "Runner/RunnerUtilities.cpp"
+#include "UtilityFunctions.h"
 #include <stdlib.h>
 #include "Competition/Performance.h"
 #include <vector>
@@ -33,9 +33,11 @@ int main() {
 	std::sort(performance.begin(), performance.end(), Performance::comparePerformances);
 
 	for (int i = 0 ; i < teamSize * 4 ; i++) {
-		cout << i + 1 << "\t" << RunnerUtilities::translateTime(performance[i]->getTime()) << "\t"
+		cout << i + 1 << "\t" << UtilityFunctions::translateTime(performance[i]->getTime()) << "\t"
 			<< performance[i]->getRunner()->toString();
 	}
+
+	UtilityFunctions::scoreMeet(performance);
 
 	delete waunakee;
 	delete deForest;

@@ -7,7 +7,9 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include "Runner.h"
+#include <vector>
+#include <map>
+#include "Runner/Runner.h"
 
 using namespace std;
 
@@ -23,10 +25,10 @@ static char *allLastNames[numNames] = {"Carey", "Jones", "Jennings",
 "Kenas", "Solinsky", "Bechtel", "Hecht", "Klubertanz", "Spellman", "Russo",
 "Maddox", "Slater", "Lee", "Braun", "Dorf"};
 
-class RunnerUtilities {
+class UtilityFunctions {
 
 public:
-	static Runner * newRunner(const Team * team) {
+	static Runner * newRunner(Team * team) {
 		char * firstName = allFirstNames[rand() % numNames];
 		char * lastName = allLastNames[rand() % numNames];
 		int yearRand = rand() % 100;
@@ -54,6 +56,18 @@ public:
 		sprintf(timeString, "%02d:%02d", time / 60, time % 60);
 
 		return timeString;
+	}
+
+	static std::vector<Team*> scoreMeet(std::vector<Performance*> performances) {
+		std::map<Team*, int> scores;
+
+		std::sort(performances.begin(), performances.end(), Performance::comparePerformances);
+
+		for (int i = 0  ; i < performances.size() ; i++) {
+			Performance * performance = performances[i];
+			scores[performance->getRunner()->getTeam()] =
+				scores[performance->getRunner()->getTeam()] + i + 1;
+		}
 	}
 };
 

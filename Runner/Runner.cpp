@@ -10,7 +10,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-Runner::Runner(char * firstName, char * lastName, school_year year, int baseTalent, const Team * team){
+Runner::Runner(char * firstName, char * lastName, school_year year, int baseTalent, Team * team){
 	this->firstName = firstName;
 	this->lastName = lastName;
 	this->year = year;
@@ -43,4 +43,8 @@ char * Runner::toString() const {
 
 void Runner::appendPerformance(Performance * performance) {
 	performances.push_back(performance);
+}
+
+Team * Runner::getTeam() {
+	return team;
 }

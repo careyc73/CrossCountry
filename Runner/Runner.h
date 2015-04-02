@@ -30,17 +30,18 @@ private:
 	school_year year;
 	char * presentation;
 	int baseTalent;
-	const Team * team;
+	Team * team;
 
 	std::vector<Performance *> performances;
 
 public:
-	Runner(char * firstName, char * lastName, school_year year, int baseTalent, const Team * team);
+	Runner(char * firstName, char * lastName, school_year year, int baseTalent, Team * team);
 	~Runner();
 
 	int getBaseTalent();
 	char * toString() const;
 	void appendPerformance(Performance * performance);
+	Team * getTeam();
 };
 
 
