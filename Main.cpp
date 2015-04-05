@@ -19,6 +19,9 @@ int main() {
 	teams.push_back(new Team("DeForest"));
 	teams.push_back(new Team("McFarland"));
 	teams.push_back(new Team("Verona"));
+	teams.push_back(new Team("Sun Prairie"));
+	teams.push_back(new Team("Sauk Prairie"));
+	teams.push_back(new Team("Lodi"));
 
 	Meet * meet = new Meet(teams);
 

@@ -28,7 +28,7 @@ private:
 	char * firstName;
 	char * lastName;
 	school_year year;
-	char * presentation;
+	char * fullName;
 	int baseTalent;
 	Team * team;
 
@@ -39,9 +39,10 @@ public:
 	~Runner();
 
 	int getBaseTalent();
-	char * toString() const;
 	void appendPerformance(Performance * performance);
 	Team * getTeam();
+	char * getName();
+	school_year getYear();
 };
 
 

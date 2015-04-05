@@ -6,6 +6,7 @@
  */
 
 #include "Meet.h"
+#include <iomanip>
 #include "../UtilityFunctions.h"
 
 Meet::Meet(std::vector<Team *> competingTeams) {
@@ -31,7 +32,11 @@ std::vector<Performance *> Meet::getRunners() {
 void Meet::outputRunnerResults() {
 	for (int i = 0 ; i < runners.size() ; i++) {
 		Runner * runner = runners[i]->getRunner();
-		cout << i + 1 << " " << runner->toString();
+		cout 	<< std::left << setw(4) << i + 1
+				<< setw(8) << UtilityFunctions::translateTime(runners[i]->getTime())
+				<< setw(32) << runner->getName()
+				<< setw(5) << runner->getYear()
+				<< setw(20) << runner->getTeam()->getName() << "\n";
 	}
 
 	cout << "\n";
@@ -40,7 +45,9 @@ void Meet::outputRunnerResults() {
 void Meet::outputTeamResults() {
 	for (int i = 0 ; i < teams.size() ; i++) {
 		Team * team = teams[i]->getTeam();
-		cout << i + 1 << " " << team->getName() << " " << teams[i]->getScore() << "\n";
+		cout 	<< std::left << setw(3) << i + 1
+				<< setw(20) << team->getName()
+				<< setw(5) << teams[i]->getScore() << "\n";
 	}
 
 	cout << "\n";

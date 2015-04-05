@@ -17,14 +17,10 @@ Runner::Runner(char * firstName, char * lastName, school_year year, int baseTale
 	this->baseTalent = baseTalent;
 	this->team = team;
 
-	int padding = 55 - (strlen(firstName) + strlen(lastName));
-	char * presentationString = new char[22];
-	sprintf(presentationString, "%%s %%-%ds %%2d\t%%s\n", padding);
-	presentation = new char [80];
-
 	const char * teamName = team->getName();
 
-	sprintf(presentation, presentationString, firstName, lastName, year, teamName);
+	fullName = new char[strlen(firstName) + strlen(lastName) + 3];
+	sprintf(fullName, "%s %s", firstName, lastName);
 }
 
 Runner::~Runner() {
@@ -37,14 +33,18 @@ int Runner::getBaseTalent() {
 	return baseTalent;
 }
 
-char * Runner::toString() const {
-	return presentation;
-}
-
 void Runner::appendPerformance(Performance * performance) {
 	performances.push_back(performance);
 }
 
 Team * Runner::getTeam() {
 	return team;
+}
+
+char * Runner::getName() {
+	return fullName;
+}
+
+school_year Runner::getYear() {
+	return year;
 }
