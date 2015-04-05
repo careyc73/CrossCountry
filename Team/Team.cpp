@@ -36,3 +36,15 @@ void Team::appendPerformances(std::vector<Performance *> & performances) {
 		performances.push_back(new Performance(runners[i]));
 	}
 }
+
+void Team::age() {
+	for (int i = 0 ; i < teamSize ; i++) {
+		if (runners[i]->getYear() == school_year::Senior) {
+			delete runners[i];
+			runners[i] = UtilityFunctions::newRunner(this);
+		}
+		else {
+			runners[i]->age();
+		}
+	}
+}

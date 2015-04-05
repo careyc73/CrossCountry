@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <stdexcept>
 
 Runner::Runner(char * firstName, char * lastName, school_year year, int baseTalent, Team * team){
 	this->firstName = firstName;
@@ -47,4 +48,31 @@ char * Runner::getName() {
 
 school_year Runner::getYear() {
 	return year;
+}
+
+void Runner::age() {
+	if (year == school_year::Senior) {
+		throw std::invalid_argument("Runner is already a senior, they're graduating");
+	} else if (year == school_year::Junior) {
+		year = school_year::Senior;
+	} else if (year == school_year::Sophmore) {
+		year = school_year::Junior;
+	} else if (year == school_year::Freshman) {
+		year = school_year::Sophmore;
+	}
+
+	int adjustBucket = rand() % 100;
+	double adjust;
+
+	if (adjustBucket < 20) {
+		adjust = 1 + (((double) (rand() % 1500) - 1200.0) / 10000.0);
+	}
+	else if (adjustBucket > 96) {
+		adjust = 1 + (((double) (rand() % 1000) - 200.0) / 10000.0);
+	}
+	else {
+		adjust = 1 + (((double) (rand() % 1000) - 700.0) / 10000.0);
+	}
+
+	baseTalent = baseTalent * adjust;
 }

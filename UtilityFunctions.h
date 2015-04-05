@@ -48,7 +48,7 @@ public:
 			year = Senior;
 		}
 
-		return new Runner(firstName, lastName, year, rand() % 270, team);
+		return new Runner(firstName, lastName, year, (rand() % 270) + 200, team);
 	}
 
 	static char * translateTime(int time) {

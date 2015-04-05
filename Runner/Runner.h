@@ -43,6 +43,8 @@ public:
 	Team * getTeam();
 	char * getName();
 	school_year getYear();
+
+	void age();
 };
 
 

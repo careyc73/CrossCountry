@@ -16,7 +16,7 @@ class Runner;
 
 class Performance {
 private:
-	static const int baseFinishTime = 990;
+	static const int baseFinishTime = 790;
 
 	Runner * runner;
 	int time;

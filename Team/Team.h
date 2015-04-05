@@ -30,6 +30,8 @@ public:
 	Runner * getRunner(int runner);
 	char * getName() const;
 	void appendPerformances(std::vector<Performance *> & performances);
+
+	void age();
 };
 
 

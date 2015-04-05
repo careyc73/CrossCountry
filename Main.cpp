@@ -23,9 +23,19 @@ int main() {
 	teams.push_back(new Team("Sauk Prairie"));
 	teams.push_back(new Team("Lodi"));
 
-	Meet * meet = new Meet(teams);
+	char continueRunning = 'Y';
+	while (continueRunning != 'N') {
+		for (int i = 0 ; i < teams.size() ; i++) {
+			teams[i]->age();
+		}
 
-	meet->outputTeamResults();
-	meet->outputRunnerResults();
+		Meet * meet = new Meet(teams);
+
+		meet->outputTeamResults();
+		meet->outputRunnerResults();
+
+		cout << "Continue?  (Y/N)\n";
+		cin >> continueRunning;
+	}
 }
 
