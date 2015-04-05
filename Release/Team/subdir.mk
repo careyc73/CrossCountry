@@ -4,26 +4,20 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
-../Competition/Meet.cpp \
-../Competition/Performance.cpp \
-../Competition/TeamPerformance.cpp 
+../Team/Team.cpp 
 
 OBJS += \
-./Competition/Meet.o \
-./Competition/Performance.o \
-./Competition/TeamPerformance.o 
+./Team/Team.o 
 
 CPP_DEPS += \
-./Competition/Meet.d \
-./Competition/Performance.d \
-./Competition/TeamPerformance.d 
+./Team/Team.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
-Competition/%.o: ../Competition/%.cpp
+Team/%.o: ../Team/%.cpp
 	@echo 'Building file: $<'
 	@echo 'Invoking: Cross G++ Compiler'
-	g++ -O0 -g3 -Wall -c -fmessage-length=0 -std=c++11 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o "$@" "$<"
+	g++ -O3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 

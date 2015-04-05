@@ -9,11 +9,14 @@
 #define TEAM_H_
 
 #include <string>
+#include <vector>
 #include "../Runner/Runner.h"
+#include "../Competition/Performance.h"
 
 static const int teamSize = 8;
 
 class Runner;
+class Performance;
 
 class Team {
 private:
@@ -26,6 +29,7 @@ public:
 
 	Runner * getRunner(int runner);
 	char * getName() const;
+	void appendPerformances(std::vector<Performance *> & performances);
 };
 
 

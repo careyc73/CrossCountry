@@ -23,3 +23,11 @@ Runner * Performance::getRunner() {
 	return runner;
 }
 
+void Performance::setPlace(int place) {
+	this->place = place;
+}
+
+int Performance::getPlace() {
+	return this->place;
+}
+

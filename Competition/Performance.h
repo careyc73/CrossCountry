@@ -20,6 +20,7 @@ private:
 
 	Runner * runner;
 	int time;
+	int place;
 //	const Meet * meet;
 
 public:
@@ -27,6 +28,8 @@ public:
 
 	int getTime();
 	Runner * getRunner();
+	void setPlace(int place);
+	int getPlace();
 
 	static bool comparePerformances(Performance * runnerOne, Performance * runnerTwo) {
 		return runnerOne->time < runnerTwo->time;

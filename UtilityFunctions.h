@@ -10,6 +10,7 @@
 #include <vector>
 #include <map>
 #include "Runner/Runner.h"
+#include "Competition/TeamPerformance.h"
 
 using namespace std;
 
@@ -58,16 +59,30 @@ public:
 		return timeString;
 	}
 
-	static std::vector<Team*> scoreMeet(std::vector<Performance*> performances) {
-		std::map<Team*, int> scores;
+	static std::vector<TeamPerformance *> scoreMeet(std::vector<Performance*> performances) {
+		std::map<Team *, std::vector<Performance *>> teamRunners;
 
 		std::sort(performances.begin(), performances.end(), Performance::comparePerformances);
 
 		for (int i = 0  ; i < performances.size() ; i++) {
 			Performance * performance = performances[i];
-			scores[performance->getRunner()->getTeam()] =
-				scores[performance->getRunner()->getTeam()] + i + 1;
+			performance->setPlace(i + 1);
+			std::vector<Performance *> teamPerformance = teamRunners[performance->getRunner()->getTeam()];
+			teamPerformance.push_back(performance);
+			teamRunners[performance->getRunner()->getTeam()] = teamPerformance;
 		}
+
+		std::vector<TeamPerformance *> teamPerformances;
+		typedef std::map<Team *, std::vector<Performance *>>::iterator it_type;
+
+		for (	it_type runnerIterator = teamRunners.begin() ;
+				runnerIterator != teamRunners.end() ;
+				runnerIterator ++) {
+			std::sort(runnerIterator->second.begin(), runnerIterator->second.end(), Performance::comparePerformances);
+			teamPerformances.push_back(new TeamPerformance(runnerIterator->first, runnerIterator->second));
+		}
+
+		return teamPerformances;
 	}
 };
 

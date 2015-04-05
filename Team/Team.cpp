@@ -29,3 +29,10 @@ Runner * Team::getRunner(int runner) {
 char * Team::getName() const {
 	return teamName;
 }
+
+void Team::appendPerformances(std::vector<Performance *> & performances) {
+	for (int i = 0 ; i < teamSize ; i++) {
+		srand(time(NULL));
+		performances.push_back(new Performance(runners[i]));
+	}
+}
