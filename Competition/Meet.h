@@ -13,14 +13,19 @@
 #include "Performance.h"
 
 class Meet {
+protected:
+	std::vector<Team *> teamsInMeet;
+
 private:
 	std::vector<TeamPerformance *> teams;
 	std::vector<Performance *> runners;
 
 public:
 	Meet(std::vector<Team *> teams);
-	~Meet();
 
+	void runMeet();
+
+	std::vector<Team *> getCompetingTeams();
 	std::vector<TeamPerformance *> getTeams();
 	std::vector<Performance *> getRunners();
 

@@ -4,16 +4,19 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
+../Competition/ConferenceMeet.cpp \
 ../Competition/Meet.cpp \
 ../Competition/Performance.cpp \
 ../Competition/TeamPerformance.cpp 
 
 OBJS += \
+./Competition/ConferenceMeet.o \
 ./Competition/Meet.o \
 ./Competition/Performance.o \
 ./Competition/TeamPerformance.o 
 
 CPP_DEPS += \
+./Competition/ConferenceMeet.d \
 ./Competition/Meet.d \
 ./Competition/Performance.d \
 ./Competition/TeamPerformance.d 

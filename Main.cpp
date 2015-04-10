@@ -8,6 +8,8 @@
 #include "Team/Team.h"
 #include <vector>
 #include "Competition/Meet.h"
+#include "Team/Conference.h"
+#include <iomanip>
 
 using namespace std;
 
@@ -15,27 +17,46 @@ int main() {
 	srand(time(NULL));
 
 	std::vector<Team *> teams;
-	teams.push_back(new Team("Waunakee"));
-	teams.push_back(new Team("DeForest"));
-	teams.push_back(new Team("McFarland"));
-	teams.push_back(new Team("Verona"));
-	teams.push_back(new Team("Sun Prairie"));
-	teams.push_back(new Team("Sauk Prairie"));
-	teams.push_back(new Team("Lodi"));
+	teams.push_back(new Team("A"));
+	teams.push_back(new Team("B"));
+	teams.push_back(new Team("C"));
+	teams.push_back(new Team("D"));
+	teams.push_back(new Team("E"));
+	teams.push_back(new Team("F"));
 
-	char continueRunning = 'Y';
-	while (continueRunning != 'N') {
-		for (int i = 0 ; i < teams.size() ; i++) {
-			teams[i]->age();
+	Conference * conference = new Conference(teams);
+
+	std::vector<ConferenceMeet *> meets = conference->getConferenceMeets();
+
+	for (int i = 0 ; i < meets.size() ; i++) {
+		ConferenceMeet * meet = meets[i];
+
+		cout << setw(5) << meet->getWeek();
+
+		std::vector<Team *> teamsInMeet = meet->getCompetingTeams();
+		for (int j = 0 ; j < teamsInMeet.size() ; j++) {
+			cout << setw(20) << teamsInMeet[j]->getName();
 		}
 
-		Meet * meet = new Meet(teams);
-
-		meet->outputTeamResults();
-		meet->outputRunnerResults();
-
-		cout << "Continue?  (Y/N)\n";
-		cin >> continueRunning;
+		cout << "\n";
 	}
+
+//
+//	teams = conference->getTeams();
+//
+//	char continueRunning = 'Y';
+//	while (continueRunning != 'N') {
+//		for (int i = 0 ; i < teams.size() ; i++) {
+//			teams[i]->age();
+//		}
+//
+//		Meet * meet = new Meet(teams);
+//
+//		meet->outputTeamResults();
+//		meet->outputRunnerResults();
+//
+//		cout << "Continue?  (Y/N)\n";
+//		cin >> continueRunning;
+//	}
 }
 

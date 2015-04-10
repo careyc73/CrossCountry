@@ -10,8 +10,12 @@
 #include "../UtilityFunctions.h"
 
 Meet::Meet(std::vector<Team *> competingTeams) {
-	for (int i = 0 ; i < competingTeams.size() ; i++) {
-		competingTeams[i]->appendPerformances(runners);
+	teamsInMeet = competingTeams;
+}
+
+void Meet::runMeet() {
+	for (int i = 0 ; i < teamsInMeet.size() ; i++) {
+		teamsInMeet[i]->appendPerformances(runners);
 	}
 
 	std::sort(runners.begin(), runners.end(), Performance::comparePerformances);
@@ -20,6 +24,9 @@ Meet::Meet(std::vector<Team *> competingTeams) {
 	std::sort(teams.begin(), teams.end(), TeamPerformance::comparePerformances);
 }
 
+std::vector<Team *> Meet::getCompetingTeams() {
+	return teamsInMeet;
+}
 
 std::vector<TeamPerformance *> Meet::getTeams() {
 	return teams;
