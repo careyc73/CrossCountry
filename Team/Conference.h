@@ -16,19 +16,23 @@
 class Conference {
 private:
 	std::vector<Team *> teams;
+	char * name;
 
 public:
-	Conference(std::vector<Team *> teams);
+	Conference(char * name, std::vector<Team *> teams);
 
 	std::vector<Team *> getTeams();
 	std::vector<ConferenceMeet *> getConferenceMeets();
+
+	char * getName();
 
 private :
 	Team * getMatchTeam(Team * team,
 						std::map<Team *, set<Team *>> teamsScheduledForThisTeam,
 						std::set<Team *> teamsRunningThisWeek,
 						int teamIndex);
-	int nextTeamToMatch(int candidate, set<Team *> teamsRunningThisWeek);
+	int nextTeamToMatch(int start, set<Team *> teamsRunningThisWeek);
+	long factorial(long x);
 };
 
 

@@ -8,8 +8,13 @@
 #include "Conference.h"
 #include <iomanip>
 
-Conference::Conference(std::vector<Team *> teamsInConference) {
+Conference::Conference(char * name, std::vector<Team *> teamsInConference) {
 	this->teams = teamsInConference;
+	this->name = name;
+}
+
+char * Conference::getName() {
+	return name;
 }
 
 std::vector<Team *> Conference::getTeams() {
@@ -20,74 +25,87 @@ std::vector<ConferenceMeet *> Conference::getConferenceMeets() {
 	std::vector<ConferenceMeet *> meets;
 	std::map<Team *, set<Team *>> teamsScheduled;
 
-	int numWeeks = ((teams.size() % 2) == 0) ? teams.size() -1 : teams.size();
-	int meetsPerWeek = teams.size() / 2;
+	long numMeets = factorial(teams.size()) / (factorial(2) * factorial(teams.size() - 2));
 
-	for (int i = 0 ; i < numWeeks ; i++) {
-		cout << "New Week\n";
+	int week = 1;
 
+	while (meets.size() < numMeets) {
+		int numMeetsThisWeek = 0;
+		int nextToScan = (week - 1) % teams.size();
 		std::set<Team *> teamsRunningThisWeek;
 
-		Team * teamSeekingMatch = teams[i];
-		for (int j = 0 ; j < meetsPerWeek ; j++) {
+		for (int i = 0 ; i < teams.size() && numMeetsThisWeek < teams.size() / 2; i++) {
+			int teamOneIndex = nextTeamToMatch(nextToScan, teamsRunningThisWeek);
+
+			Team * teamOne = teams[teamOneIndex];
+
+			Team * teamTwo = getMatchTeam(teamOne, teamsScheduled, teamsRunningThisWeek, teamOneIndex);
+
+			if (teamTwo == NULL) {
+				nextToScan = (nextToScan + 1) % teams.size();
+				continue;
+			}
+
 			std::vector<Team *> teamsInMeet;
-			teamsInMeet.push_back(teamSeekingMatch);
+			teamsInMeet.push_back(teamOne);
+			teamsInMeet.push_back(teamTwo);
+			teamsRunningThisWeek.insert(teamOne);
+			teamsRunningThisWeek.insert(teamTwo);
 
-			teamsRunningThisWeek.insert(teamSeekingMatch);
-			set<Team *> scheduledForMatchTeam = teamsScheduled[teamSeekingMatch];
-			Team * match = getMatchTeam(teamSeekingMatch, teamsScheduled, teamsRunningThisWeek, i);
-			teamsRunningThisWeek.insert(match);
-			scheduledForMatchTeam.insert(match);
-			teamsScheduled[teamSeekingMatch] = scheduledForMatchTeam;
-			teamsInMeet.push_back(match);
+			set<Team *> scheduledForMatchTeam = teamsScheduled[teamOne];
+			scheduledForMatchTeam.insert(teamTwo);
+			teamsScheduled[teamOne] = scheduledForMatchTeam;
 
-			meets.push_back(new ConferenceMeet(teamsInMeet, i + 1));
+			scheduledForMatchTeam = teamsScheduled[teamTwo];
+			scheduledForMatchTeam.insert(teamOne);
+			teamsScheduled[teamTwo] = scheduledForMatchTeam;
 
-			if ((j + 1) < meetsPerWeek) {
-				teamSeekingMatch = teams[nextTeamToMatch((i + 1) % teams.size() , teamsRunningThisWeek)];
-			}
+			meets.push_back(new ConferenceMeet(teamsInMeet, week));
+
+			numMeetsThisWeek++;
+			nextToScan = (nextToScan + 1) % teams.size();
 		}
 
-		for (int k = 0 ; k < meets.size() ; k++) {
-			ConferenceMeet * meet = meets[k];
-
-			cout << setw(5) << meet->getWeek();
-
-			std::vector<Team *> teamsInMeet = meet->getCompetingTeams();
-			for (int j = 0 ; j < teamsInMeet.size() ; j++) {
-				cout << setw(20) << teamsInMeet[j]->getName();
-			}
-
-			cout << "\n";
-		}
+		week++;
 	}
+
+	meets.push_back(new ConferenceMeet(teams, week + 1));
 
 	return meets;
 }
 
-int Conference::nextTeamToMatch(int candidate, set<Team *> teamsRunningThisWeek) {
+int Conference::nextTeamToMatch(int start, set<Team *> teamsRunningThisWeek) {
 	while(true) {
-		if (!teamsRunningThisWeek.count(teams[candidate])) {
-			return candidate;
+		if (!teamsRunningThisWeek.count(teams[start])) {
+			return start;
 		}
 
-		candidate = (candidate + 1) % teams.size();
+		start = (start + 1) % teams.size();
 	}
 }
 
 Team * Conference::getMatchTeam(Team * team, std::map<Team *, set<Team *>> teamsScheduledForThisTeam,
 								std::set<Team *> teamsRunningThisWeek, int teamIndex) {
-	cout << "Seeking match for " << team->getName() << "\n";
 	int confSize = teams.size();
 	int nextCandidate = (teamIndex + 1) % confSize;
 	set<Team *> teamsAlreadyScheduled = teamsScheduledForThisTeam[team];
 	while (true) {
 		Team * candidateTeam = teams[nextCandidate];
 		if (!teamsAlreadyScheduled.count(candidateTeam) && !teamsRunningThisWeek.count(candidateTeam)) {
-			cout << "Found Match " << teams[nextCandidate]->getName() << "\n";
 			return teams[nextCandidate];
 		}
 
 		nextCandidate = (nextCandidate + 1) % confSize;
+
+		if (nextCandidate == teamIndex)
+			return NULL;
 	}
+}
+
+long Conference::factorial(long x) {
+	long result = x;
+	while (--x > 1) {
+		result *= x;
+	}
+	return result;
 }
