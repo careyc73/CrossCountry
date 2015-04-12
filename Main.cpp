@@ -9,6 +9,8 @@
 #include <vector>
 #include "Competition/Meet.h"
 #include "Team/Conference.h"
+#include "Competition/ConferenceSeason.h"
+#include "Competition/ConferenceMeet.h"
 #include <iomanip>
 
 using namespace std;
@@ -33,18 +35,22 @@ int main() {
 	teams.push_back(new Team("Waunakee"));
 
 	Conference * badger = new Conference("Badger", teams);
+	ConferenceSeason * season = badger->getSeason();
 
 	std::vector<ConferenceMeet *> meets = badger->getConferenceMeets();
 
 	char next;
 	int week = 0;
 
-	for (int i = 0 ; i < meets.size() ; i++) {
-		ConferenceMeet * meet = meets[i];
+	ConferenceMeet * meet;
+
+	for (uint i = 0 ; i < meets.size() - 1 ; i++) {
+		meet = meets[i];
 
 		if (meet->getWeek() != week) {
 			week = meet->getWeek();
 			cout << "*** Week " << week << " ***\n";
+			season->outputTeamRankings();
 		}
 
 		meet->runMeet();
@@ -53,8 +59,24 @@ int main() {
 
 		meet->outputRunnerResults();
 
+		meet->score();
+
 		cout << "Next? Press Button\n";
 		cin >> next;
 	}
+
+	season->outputTeamRankings();
+
+	meet = meets[meets.size() - 1];
+
+	meet->runMeet();
+
+	meet->outputTeamResults();
+
+	meet->outputRunnerResults();
+
+	meet->score();
+
+	season->outputTeamRankings();
 }
 

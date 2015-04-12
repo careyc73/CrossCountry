@@ -11,12 +11,16 @@
 #include <vector>
 #include <map>
 #include <set>
-#include "../Competition/ConferenceMeet.h"
+#include "Team.h"
+
+class ConferenceSeason;
+class ConferenceMeet;
 
 class Conference {
 private:
 	std::vector<Team *> teams;
 	char * name;
+	ConferenceSeason * conferenceSeason;
 
 public:
 	Conference(char * name, std::vector<Team *> teams);
@@ -25,6 +29,8 @@ public:
 	std::vector<ConferenceMeet *> getConferenceMeets();
 
 	char * getName();
+
+	ConferenceSeason * getSeason();
 
 private :
 	Team * getMatchTeam(Team * team,

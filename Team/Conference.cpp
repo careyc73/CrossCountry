@@ -6,11 +6,15 @@
  */
 
 #include "Conference.h"
+#include "../Competition/ConferenceSeason.h"
+#include "../Competition/DualMeet.h"
+#include "../Competition/ConferenceFinal.h"
 #include <iomanip>
 
 Conference::Conference(char * name, std::vector<Team *> teamsInConference) {
 	this->teams = teamsInConference;
 	this->name = name;
+	this->conferenceSeason = new ConferenceSeason(this);
 }
 
 char * Conference::getName() {
@@ -19,6 +23,10 @@ char * Conference::getName() {
 
 std::vector<Team *> Conference::getTeams() {
 	return teams;
+}
+
+ConferenceSeason * Conference::getSeason() {
+	return this->conferenceSeason;
 }
 
 std::vector<ConferenceMeet *> Conference::getConferenceMeets() {
@@ -60,7 +68,7 @@ std::vector<ConferenceMeet *> Conference::getConferenceMeets() {
 			scheduledForMatchTeam.insert(teamOne);
 			teamsScheduled[teamTwo] = scheduledForMatchTeam;
 
-			meets.push_back(new ConferenceMeet(teamsInMeet, week));
+			meets.push_back(new DualMeet(this, teamsInMeet, week));
 
 			numMeetsThisWeek++;
 			nextToScan = (nextToScan + 1) % teams.size();
@@ -69,7 +77,7 @@ std::vector<ConferenceMeet *> Conference::getConferenceMeets() {
 		week++;
 	}
 
-	meets.push_back(new ConferenceMeet(teams, week + 1));
+	meets.push_back(new ConferenceFinal(this, teams, week + 1));
 
 	return meets;
 }

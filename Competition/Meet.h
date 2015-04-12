@@ -16,7 +16,7 @@ class Meet {
 protected:
 	std::vector<Team *> teamsInMeet;
 
-private:
+protected:
 	std::vector<TeamPerformance *> teams;
 	std::vector<Performance *> runners;
 

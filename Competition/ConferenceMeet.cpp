@@ -6,11 +6,16 @@
  */
 
 #include "ConferenceMeet.h"
+#include "../Team/Conference.h"
 
-ConferenceMeet::ConferenceMeet(std::vector<Team *> teams, int week) : Meet(teams) {
+ConferenceMeet::ConferenceMeet(Conference * conference, std::vector<Team *> teams, int week) : Meet(teams) {
 	this->teamsInMeet = teams;
 	this->week = week;
+
+	this->season = conference->getSeason();
 }
+
+ConferenceMeet::~ConferenceMeet() {}
 
 int ConferenceMeet::getWeek() {
 	return this->week;
