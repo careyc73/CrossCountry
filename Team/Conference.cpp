@@ -29,6 +29,16 @@ ConferenceSeason * Conference::getSeason() {
 	return this->conferenceSeason;
 }
 
+ConferenceSeason * Conference::startNextSeason() {
+	for (uint i = 0 ; i < teams.size() ; i++) {
+		teams[i]->age();
+	}
+
+	conferenceSeason = new ConferenceSeason(this);
+
+	return conferenceSeason;
+}
+
 std::vector<ConferenceMeet *> Conference::getConferenceMeets() {
 	std::vector<ConferenceMeet *> meets;
 	std::map<Team *, set<Team *>> teamsScheduled;

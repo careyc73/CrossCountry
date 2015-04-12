@@ -15,32 +15,12 @@
 
 using namespace std;
 
-int main() {
-	srand(time(NULL));
 
-	std::vector<Team *> teams;
-	teams.push_back(new Team("Baraboo"));
-	teams.push_back(new Team("DeForest"));
-	teams.push_back(new Team("Edgewood"));
-	teams.push_back(new Team("Fort Atkinson"));
-	teams.push_back(new Team("Milton"));
-	teams.push_back(new Team("Monona Grove"));
-	teams.push_back(new Team("Monroe"));
-	teams.push_back(new Team("Mount Horeb"));
-	teams.push_back(new Team("Oregon"));
-	teams.push_back(new Team("Portage"));
-	teams.push_back(new Team("Reedsburg"));
-	teams.push_back(new Team("Sauk Prairie"));
-	teams.push_back(new Team("Stoughton"));
-	teams.push_back(new Team("Waunakee"));
-
-	Conference * badger = new Conference("Badger", teams);
-	ConferenceSeason * season = badger->getSeason();
-
-	std::vector<ConferenceMeet *> meets = badger->getConferenceMeets();
-
+void runSeason(Conference * conference, ConferenceSeason * season) {
 	char next;
 	int week = 0;
+
+	std::vector<ConferenceMeet *> meets = conference->getConferenceMeets();
 
 	ConferenceMeet * meet;
 
@@ -80,3 +60,31 @@ int main() {
 	season->outputTeamRankings();
 }
 
+int main() {
+	srand(time(NULL));
+
+	std::vector<Team *> teams;
+	teams.push_back(new Team("Baraboo"));
+	teams.push_back(new Team("DeForest"));
+	teams.push_back(new Team("Edgewood"));
+	teams.push_back(new Team("Fort Atkinson"));
+	teams.push_back(new Team("Milton"));
+	teams.push_back(new Team("Monona Grove"));
+	teams.push_back(new Team("Monroe"));
+	teams.push_back(new Team("Mount Horeb"));
+	teams.push_back(new Team("Oregon"));
+	teams.push_back(new Team("Portage"));
+	teams.push_back(new Team("Reedsburg"));
+	teams.push_back(new Team("Sauk Prairie"));
+	teams.push_back(new Team("Stoughton"));
+	teams.push_back(new Team("Waunakee"));
+
+	Conference * badger = new Conference("Badger", teams);
+	ConferenceSeason * season = badger->getSeason();
+
+	while (true) {
+		runSeason(badger, season);
+
+		season = badger->startNextSeason();
+	}
+}

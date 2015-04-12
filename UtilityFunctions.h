@@ -14,17 +14,18 @@
 
 using namespace std;
 
-static const int numNames = 22;
+static const int numNames = 29;
 
 static char *allFirstNames[numNames] = {"Chris", "Gabe", "Travis",
 "Matt", "Mike", "Tom", "Joe", "Bob", "Myles", "Bryon", "Todd", "Lee",
 "Kurt", "Cooper", "Dillon", "Jeff", "Saul", "Noah", "John", "Jon",
-"Ryan", "Phil"};
+"Ryan", "Phil", "Ari", "Don", "Ben", "Ed", "Scott", "Ken", "Jake"};
 
 static char *allLastNames[numNames] = {"Carey", "Jones", "Jennings",
 "Smith", "Kramer", "Schroeder", "Erickson", "Miller", "Downs", "Kluever",
 "Kenas", "Solinsky", "Bechtel", "Hecht", "Klubertanz", "Spellman", "Russo",
-"Maddox", "Slater", "Lee", "Braun", "Dorf"};
+"Maddox", "Slater", "Lee", "Braun", "Dorf", "Raemisch", "Ruggles", "Kennedy",
+"Baker", "Sanders", "McCausland", "Oelke"};
 
 class UtilityFunctions {
 

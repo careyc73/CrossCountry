@@ -31,6 +31,7 @@ public:
 	char * getName();
 
 	ConferenceSeason * getSeason();
+	ConferenceSeason * startNextSeason();
 
 private :
 	Team * getMatchTeam(Team * team,
